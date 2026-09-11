@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TechnologyList from "./TechnologyList";
 import YourStack from "./YourStack";
+import { toast } from "react-toastify";
 
 const TechnologyCard = () => {
   const [data, setData] = useState([]);
@@ -22,10 +23,12 @@ const TechnologyCard = () => {
     }
 
     setStack([...stack, item]);
+    toast.success("Technology added")
   };
 
   const removeFromStack = (id) => {
     setStack(stack.filter((item) => item.id !== id));
+    toast.error("Technology removed")
   };
 
   return (
