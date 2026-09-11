@@ -30,7 +30,6 @@ const TechnologyCard = () => {
 
   return (
     <div className="max-w-[1200px] mx-auto px-4">
-      {/* Heading */}
       <div>
         <h1 className="text-[33px] font-bold">
           Explore the <span className="text-[#EC4899]">Technologies</span>
@@ -41,9 +40,7 @@ const TechnologyCard = () => {
         </p>
       </div>
 
-      {/* Main Section */}
       <div className="flex gap-6 mt-10">
-        {/* Technology Cards */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((item) => (
             <TechnologyList
@@ -55,7 +52,6 @@ const TechnologyCard = () => {
           ))}
         </div>
 
-        {/* Your Stack */}
         <div className="w-[300px] shrink-0">
           <YourStack stack={stack} onRemove={removeFromStack} />
         </div>
