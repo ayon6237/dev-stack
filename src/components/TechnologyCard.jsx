@@ -6,12 +6,14 @@ import { toast } from "react-toastify";
 const TechnologyCard = () => {
   const [data, setData] = useState([]);
   const [stack, setStack] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/data.json")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
+        setLoading(false)
       });
   }, []);
 
@@ -19,17 +21,31 @@ const TechnologyCard = () => {
     const alreadyAdded = stack.some((stackItem) => stackItem.id === item.id);
 
     if (alreadyAdded) {
+      toast.error(`${item.name} is already in your stack!`);
       return;
     }
 
     setStack([...stack, item]);
-    toast.success("Technology added")
+    toast.success("Technology added");
   };
 
   const removeFromStack = (id) => {
     setStack(stack.filter((item) => item.id !== id));
-    toast.error("Technology removed")
+    toast.success("Technology removed");
   };
+
+  const removeAll = () => {
+    setStack([]);
+    toast.success("All item removed from stack")
+  };
+
+   if (loading) {
+    return (
+      <div className="flex min-h-[300px] items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-black"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1200px] mx-auto px-4">
@@ -56,7 +72,11 @@ const TechnologyCard = () => {
         </div>
 
         <div className="w-[300px] shrink-0">
-          <YourStack stack={stack} onRemove={removeFromStack} />
+          <YourStack
+            stack={stack}
+            onRemove={removeFromStack}
+            onRemoveAll={removeAll}
+          />
         </div>
       </div>
     </div>

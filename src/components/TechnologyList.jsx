@@ -27,7 +27,6 @@ const TechnologyList = ({ item, onAdd, stack }) => {
         </div>
 
         <button
-          disabled={isAdded}
           onClick={() => onAdd(item)}
           className="btn mt-4 w-full bg-black text-white"
         >
