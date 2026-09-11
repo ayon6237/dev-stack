@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
-const TechnologyList = ({ item ,onAdd}) => {
+const TechnologyList = ({ item, onAdd, stack }) => {
   const { name, category, description, icon, rating, difficulty, badge } = item;
+
+  const isAdded = stack.some((stackItem) => stackItem.id === item.id);
 
   return (
     <div className="card w-full bg-base-100 shadow-sm">
@@ -24,8 +26,12 @@ const TechnologyList = ({ item ,onAdd}) => {
           <span> ⭐ {rating} </span>
         </div>
 
-        <button className="btn mt-4 w-full bg-black text-white" onClick={()=>onAdd(item)}>
-          Add to Stack
+        <button
+          disabled={isAdded}
+          onClick={() => onAdd(item)}
+          className="btn mt-4 w-full bg-black text-white"
+        >
+          {isAdded ? "✓ Added to Stack" : "Add to Stack"}
         </button>
       </div>
     </div>

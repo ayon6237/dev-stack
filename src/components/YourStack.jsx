@@ -5,12 +5,14 @@ const YourStack = ({ stack ,onRemove}) => {
     <div className="rounded-xl bg-white p-5 shadow-sm">
       <h2 className="text-xl font-bold"> Your Stack </h2>
       <p className="mt-1 text-sm text-black/50">
-        {stack.length} technologies selected
+      {
+        stack.length === 0 ? "No technologies selected yet.": `${stack.length} technologies selected`
+      }
+        
       </p>
       {stack.length === 0 ? (
         <div className="mt-8 text-center text-sm text-black/40">
-          <p>Your stack is empty</p>
-          <p className="mt-1"> Add technologies to build your stack. </p>
+          <p className="border rounded-2xl p-5 border-dotted">Your stack is empty</p>
         </div>
       ) : (
         stack.map((item) => <StackItem key={item.id} item={item} onRemove={onRemove} />)

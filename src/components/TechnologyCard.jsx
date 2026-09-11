@@ -14,22 +14,26 @@ const TechnologyCard = () => {
       });
   }, []);
 
-  const addToStack = (item) => { 
-    setStack([...stack, item]);
-   };
+  const addToStack = (item) => {
+    const alreadyAdded = stack.some((stackItem) => stackItem.id === item.id);
 
-   const removeFromStack = (id) => { 
+    if (alreadyAdded) {
+      return;
+    }
+
+    setStack([...stack, item]);
+  };
+
+  const removeFromStack = (id) => {
     setStack(stack.filter((item) => item.id !== id));
-   };
+  };
 
   return (
     <div className="max-w-[1200px] mx-auto px-4">
-
       {/* Heading */}
       <div>
         <h1 className="text-[33px] font-bold">
-          Explore the{" "}
-          <span className="text-[#EC4899]">Technologies</span>
+          Explore the <span className="text-[#EC4899]">Technologies</span>
         </h1>
 
         <p className="text-black/50">
@@ -39,7 +43,6 @@ const TechnologyCard = () => {
 
       {/* Main Section */}
       <div className="flex gap-6 mt-10">
-
         {/* Technology Cards */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {data.map((item) => (
@@ -47,15 +50,15 @@ const TechnologyCard = () => {
               key={item.id}
               item={item}
               onAdd={addToStack}
+              stack={stack}
             />
           ))}
         </div>
 
         {/* Your Stack */}
         <div className="w-[300px] shrink-0">
-          <YourStack stack={stack} onRemove={removeFromStack}/>
+          <YourStack stack={stack} onRemove={removeFromStack} />
         </div>
-
       </div>
     </div>
   );
